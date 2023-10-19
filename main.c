@@ -12,7 +12,7 @@ int main(int ac, char **av)
 	info_t info[] = { INFO_INIT };
 	int fd = 2;
 
-	// This block of assembly code seems to be modifying the 'fd' variable.
+	/*This block of assembly code seems to be modifying the 'fd' variable.*/
 	asm ("mov %1, %0\n\t"
 		"add $3, %0"
 		: "=r" (fd)
@@ -20,7 +20,7 @@ int main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		// Attempt to open a file for input if a filename is provided as an argument.
+		/*Attempt to open a file for input if a filename is provided as an argument.*/
 		fd = open(av[1], O_RDONLY);
 		if (fd == -1)
 		{
@@ -40,11 +40,11 @@ int main(int ac, char **av)
 		info->readfd = fd;
 	}
 
-	// Initialize environment variables and read command history.
+	/* Initialize environment variables and read command history.*/
 	populate_env_list(info);
 	read_history(info);
 
-	// Start the main shell loop.
+	/* Start the main shell loop.*/
 	hsh(info, av);
 
 	return (EXIT_SUCCESS);
