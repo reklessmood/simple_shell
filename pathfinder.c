@@ -1,51 +1,86 @@
-#include "main.h"
+#include "shell.h"
 
 /**
- * find_path - Function to find the path of an executable
- * @command: The command to find the path of
+ * is_cmd - determines if a file is an executable command
+ * @info: the info struct
+ * @path: path to the file
  *
- * Return: (1) The full path of the executable, otherwise (2) NULL
+ * Return: 1 if true, 0 otherwise
  */
-char *find_path(char *command)
+int is_cmd(info_t *info, char *path)
 {
-	char *path = getenv("PATH");
-	char *token = strtok(path, ":");
 	struct stat st;
 
-	/* Check if the provided command is an absolute path */
-	if (command[0] == '/')
+	(void)info;
+	if (!path || stat(path, &st))
+		return (0);
+
+	if (st.st_mode & S_IFREG)
 	{
-		if (stat(command, &st) == 0 && st.st_mode & S_IXUSR)
-			return (strdup(command));
-		return (NULL); /* Return NULL if the absolute path is not executable */
+		return (1);
 	}
+	return (0);
+}
 
-	if (path == NULL) /* If the PATH is not set */
-		return (NULL); /* Return NULL */
-	path = strdup(path); /* Duplicate the PATH value */
-	if (path == NULL) /* If the memory allocation fails */
-		return (NULL); /* Return NULL */
-	/* While there are more tokens (directories) in the PATH */
-	while (token != NULL)
-	{/* Allocate memory for the buffer */
-		char *buffer = malloc(strlen(token) + strlen(command) + 2);
+/**
+ * dup_chars - duplicates characters
+ * @pathstr: the PATH string
+ * @start: starting index
+ * @stop: stopping index
+ *
+ * Return: pointer to new buffer
+ */
+char *dup_chars(char *pathstr, int start, int stop)
+{
+	static char buf[1024];
+	int i = 0, k = 0;
 
-		if (buffer == NULL) /* If the memory allocation fails */
-		{
-			free(path); /* Free the allocated memory for the PATH value */
-			return (NULL); /* Return NULL */
-		}
-		strcpy(buffer, token); /* Copy the token (directory) to the buffer */
-		strcat(buffer, "/"); /* Append a slash to the buffer */
-		strcat(buffer, command); /* Append the command to the buffer */
-		if (stat(buffer, &st) == 0 && st.st_mode & S_IXUSR)
-		{
-			free(path); /* Free the allocated memory for the PATH value */
-			return (buffer); /* Return the buffer as the full path of the executable */
-		}
-		free(buffer); /* Free the allocated memory for the buffer */
-		token = strtok(NULL, ":"); /* Get the next token (directory) in the PATH */
+	for (k = 0, i = start; i < stop; i++)
+		if (pathstr[i] != ':')
+			buf[k++] = pathstr[i];
+	buf[k] = 0;
+	return (buf);
+}
+
+/**
+ * find_path - finds this cmd in the PATH string
+ * @info: the info struct
+ * @pathstr: the PATH string
+ * @cmd: the cmd to find
+ *
+ * Return: full path of cmd if found or NULL
+ */
+char *find_path(info_t *info, char *pathstr, char *cmd)
+{
+	int i = 0, curr_pos = 0;
+	char *path;
+
+	if (!pathstr)
+		return (NULL);
+	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
+	{
+		if (is_cmd(info, cmd))
+			return (cmd);
 	}
-	free(path); /* Free the allocated memory for the PATH value */
-	return (NULL); /* Return NULL if no path is found */
+	while (1)
+	{
+		if (!pathstr[i] || pathstr[i] == ':')
+		{
+			path = dup_chars(pathstr, curr_pos, i);
+			if (!*path)
+				_strcat(path, cmd);
+			else
+			{
+				_strcat(path, "/");
+				_strcat(path, cmd);
+			}
+			if (is_cmd(info, path))
+				return (path);
+			if (!pathstr[i])
+				break;
+			curr_pos = i;
+		}
+		i++;
+	}
+	return (NULL);
 }
