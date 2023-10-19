@@ -51,7 +51,7 @@ char *_strdup(const char *str)
  *
  * Return: On success 1. On error, -1 is returned, and errno is set appropriately.
  */
-int putchar(char c)
+int _putchar(char c)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
