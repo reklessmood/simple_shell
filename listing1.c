@@ -26,35 +26,36 @@ size_t list_len(const list_t *h)
  */
 char **list_to_strings(list_t *head)
 {
-	list_t *node = head;
-	size_t i = list_len(head);
-	char **strs;
-	char *str;
+    list_t *node = head;
+    size_t i = list_len(head);
+    char **strs;
+    char *str;
 
-	if (!head || !i)
-		return NULL;
+    size_t j; // Declare j outside the for loop
 
-	strs = malloc(sizeof(char *) * (i + 1));
-	if (!strs)
-		return NULL;
+    if (!head || !i)
+        return NULL;
 
-	for (i = 0; node; node = node->next, i++)
-	{
-		str = malloc(_strlen(node->str) + 1);
-		if (!str)
-		{
-			for (j = 0; j < i; j++)
-				free(strs[j]);
-			free(strs);
-			return NULL;
+    strs = malloc(sizeof(char *) * (i + 1));
+    if (!strs)
+        return NULL;
+    for (i = 0; node; node = node->next, i++)
+    {
+        str = malloc(_strlen(node->str) + 1);
+        if (!str)
+        {
+            for (j = 0; j < i; j++) // Initialize j here
+                free(strs[j]);
+            free(strs);
+            return NULL;
 		}
-
-		str = _strcpy(str, node->str);
-		strs[i] = str;
-	}
-	strs[i] = NULL;
-	return strs;
+        str = _strcpy(str, node->str);
+        strs[i] = str;
+    }
+    strs[i] = NULL;
+    return strs;
 }
+
 
 /**
  * print_list - Prints all elements of a list_t linked list.
