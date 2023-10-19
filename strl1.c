@@ -1,5 +1,4 @@
 #include "shell.h"
-#include <unistd.h>
 
 /**
  * _strcpy - Copies a string.
