@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <dirent.h>
+#include <fcntl.h>
 
 #define BUFSIZE 1024
 #define DELIM " \t\r\n\a"
