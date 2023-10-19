@@ -31,7 +31,7 @@ char **list_to_strings(list_t *head)
     char **strs;
     char *str;
 
-    size_t j; // Declare j outside the for loop
+    size_t j; /* Declare j outside the for loop */
 
     if (!head || !i)
         return NULL;
@@ -44,7 +44,7 @@ char **list_to_strings(list_t *head)
         str = malloc(_strlen(node->str) + 1);
         if (!str)
         {
-            for (j = 0; j < i; j++) // Initialize j here
+            for (j = 0; j < i; j++) /* Initialize j here */
                 free(strs[j]);
             free(strs);
             return NULL;
