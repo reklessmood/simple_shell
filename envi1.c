@@ -32,7 +32,7 @@ int _unsetenv(info_t *info, char *var) {
 		return 0;
 
 	while (node) {
-		p = starts_with(node->str, var);
+		p = node_starts_with(node->str, var);
 		if (p && *p == '=') {
 			info->env_changed = delete_node_at_index(&(info->env), i);
 			i = 0;
@@ -62,12 +62,12 @@ int _setenv(info_t *info, char *var, char *value) {
 	if (!var || !value)
 		return 0;
 
-	buf = malloc(_strlen(var) + _strlen(value) + 2);
+	buf = malloc(strlen(var) + _strlen(value) + 2);
 	if (!buf)
 		return 1;
-	_strcpy(buf, var);
-	_strcat(buf, "=");
-	_strcat(buf, value);
+	strcpy(buf, var);
+	strcat(buf, "=");
+	strcat(buf, value);
 	node = info->env;
 	while (node) {
 		p = starts_with(node->str, var);
