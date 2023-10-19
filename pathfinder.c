@@ -15,7 +15,7 @@ int is_cmd(info_t *info, char *path)
 	if (!path || stat(path, &st) != 0)
 		return 0;
 
-	// Check if the file is a regular file and executable.
+	/*Check if the file is a regular file and executable.*/
 	if (S_ISREG(st.st_mode) && (st.st_mode & S_IXUSR))
 		return 1;
 
