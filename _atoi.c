@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
  * interactive - if the shell is in interactive mode return true.
  * @info: Pointer to struct address
