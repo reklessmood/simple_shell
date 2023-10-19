@@ -81,11 +81,11 @@ int replace_alias(info_t *info) {
 			return 0;
 		}
 		free(info->argv[0]);
-		p = _strchr(node->str, '=');
+		p = strchr(node->str, '=');
 		if (!p) {
 			return 0;
 		}
-		p = _strdup(p + 1);
+		p = strdup(p + 1);
 		if (!p) {
 			return 0;
 		}
@@ -110,7 +110,7 @@ int replace_vars(info_t *info) {
 			continue;
 		}
 
-		if (!_strcmp(info->argv[i], "$?"))
+		if (!strcmp(info->argv[i], "$?"))
 		{
 			replace_string(&(info->argv[i]), _strdup(convert_number(info->status, 10, 0)));
 			continue;}
