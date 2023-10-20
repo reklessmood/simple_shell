@@ -8,7 +8,7 @@
  *
  * Return: Pointer to the memory area s.
  */
-char *_memset(char *s, char b, unsigned int n);
+char *_memset(char *s, char b, unsigned int n)
 {
 	unsigned int i;
 
@@ -21,7 +21,7 @@ char *_memset(char *s, char b, unsigned int n);
  * ffree - Frees a string of strings.
  * @pp: Array of strings.
  */
-void ffree(char **pp);
+void ffree(char **pp)
 {
 	char **a = pp;
 
@@ -40,7 +40,7 @@ void ffree(char **pp);
  *
  * Return: Pointer to the newly allocated block.
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	char *p;
 

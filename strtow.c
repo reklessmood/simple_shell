@@ -6,7 +6,7 @@
  * @d: The delimiter string.
  * Return: A pointer to an array of strings, or NULL on failure.
  */
-char **strtow(char *str, char *d);
+char **strtow(char *str, char *d)
 {
 	int i, j, k, m, numwords = 0;
 	char **s;
@@ -62,7 +62,7 @@ char **strtow(char *str, char *d);
  * @d: The delimiter character.
  * Return: A pointer to an array of strings, or NULL on failure.
  */
-char **strtow2(char *str, char d);
+char **strtow2(char *str, char d)
 {
 	int i, j, k, m, numwords = 0;
 	char **s;

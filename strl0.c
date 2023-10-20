@@ -25,7 +25,7 @@ int _strlen(char *s)
  *
  * Return: Negative if s1 < s2, positive if s1 > s2, zero if s1 == s2.
  */
-int _strcmp(char *s1, char *s2);
+int _strcmp(char *s1, char *s2)
 {
 	while (*s1 && *s2)
 	{
@@ -47,7 +47,7 @@ int _strcmp(char *s1, char *s2);
  *
  * Return: Address of the next character of haystack if found, or NULL if not found.
  */
-char *starts_with(const char *haystack, const char *needle);
+char *starts_with(const char *haystack, const char *needle)
 {
 	while (*needle)
 	{
@@ -64,7 +64,7 @@ char *starts_with(const char *haystack, const char *needle);
  *
  * Return: Pointer to the destination buffer.
  */
-char *_strcat(char *dest, char *src);
+char *_strcat(char *dest, char *src)
 {
 	char *ret = dest;
 
