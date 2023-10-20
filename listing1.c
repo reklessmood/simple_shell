@@ -91,7 +91,7 @@ list_t *node_starts_with(list_t *head, const char *prefix, char c)
 {
 	while (head)
 	{
-		if (starts_with(head->str, prefix) && (c == -1 || head->str[strlen(prefix)] == c))
+		if (node_starts_with(head->str, prefix) && (c == -1 || head->str[strlen(prefix)] == c))
 			return head;
 		head = head->next;
 	}
