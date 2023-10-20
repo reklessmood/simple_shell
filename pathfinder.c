@@ -60,7 +60,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	if (!pathstr)
 		return NULL;
 
-	if (strlen(cmd) > 2 && strncmp(cmd, "./", 2) == 0)
+	if (_strlen(cmd) > 2 && starts_with(cmd, "./"))
 	{
 		if (is_cmd(info, cmd))
 			return cmd;
@@ -73,11 +73,11 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 			path = dup_chars(pathstr, curr_pos, i);
 
 			if (!*path)
-				strcat(path, cmd);
+				_strcat(path, cmd);
 			else
 			{
-				strcat(path, "/");
-				strcat(path, cmd);
+				_strcat(path, "/");
+				_strcat(path, cmd);
 			}
 
 			if (is_cmd(info, path))
