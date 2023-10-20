@@ -60,7 +60,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	if (!pathstr)
 		return NULL;
 
-	if (strlen(cmd) > 2 && node_starts_with(cmd, "./"))
+	if (strlen(cmd) > 2 && strncmp(cmd, "./", 2) == 0)
 	{
 		if (is_cmd(info, cmd))
 			return cmd;
