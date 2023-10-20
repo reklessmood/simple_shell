@@ -31,7 +31,7 @@ void set_info(info_t *info, char **av)
 			info->argv = malloc(sizeof(char *) * 2);
 			if (info->argv)
 			{
-				info->argv[0] = _strdup(info->arg);
+				info->argv[0] = strdup(info->arg);
 				info->argv[1] = NULL;
 			}
 		}
@@ -52,7 +52,7 @@ void set_info(info_t *info, char **av)
  */
 void free_info(info_t *info, int all)
 {
-	ffree(info->argv);
+	free(info->argv);
 	info->argv = NULL;
 	info->path = NULL;
 
@@ -70,13 +70,13 @@ void free_info(info_t *info, int all)
 		if (info->alias)
 			free_list(&(info->alias));
 
-		ffree(info->environ);
+		free(info->environ);
 		info->environ = NULL;
-		bfree((void **)info->cmd_buf);
+		free((void **)info->cmd_buf);
 
 		if (info->readfd > 2)
 			close(info->readfd);
 
-		_putchar(BUF_FLUSH);
+		_eputchar(BUF_FLUSH);
 	}
 }

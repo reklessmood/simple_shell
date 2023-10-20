@@ -62,7 +62,7 @@ int _setenv(info_t *info, char *var, char *value) {
 	if (!var || !value)
 		return 0;
 
-	buf = malloc(strlen(var) + _strlen(value) + 2);
+	buf = malloc(strlen(var) + strlen(value) + 2);
 	if (!buf)
 		return 1;
 	strcpy(buf, var);
@@ -70,7 +70,7 @@ int _setenv(info_t *info, char *var, char *value) {
 	strcat(buf, value);
 	node = info->env;
 	while (node) {
-		p = starts_with(node->str, var);
+		p = node_starts_with(node->str, var);
 		if (p && *p == '=') {
 			free(node->str);
 			node->str = buf;
