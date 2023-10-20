@@ -35,7 +35,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 
 			info->linecount_flag = 1;
 			remove_comments(*buf);
-			build_history_list(info, *buf, info->histcount++)
+			build_history_list(info, *buf, info->histcount++);
 			*len = r;
 			info->cmd_buf = buf;
 		}
@@ -50,7 +50,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
  *
  * Return: Bytes read.
  */
-ssize_t get_input(info_t *info);
+ssize_t get_input(info_t *info)
 {
 	static char *buf; /* The ';' command chain buffer. */
 	static size_t i, j, len;
