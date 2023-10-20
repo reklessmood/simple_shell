@@ -57,7 +57,7 @@ ssize_t get_input(info_t *info)
 	ssize_t r = 0;
 	char **buf_p = &(info->arg), *p;
 
-	_putchar(BUF_FLUSH);
+	_eputchar(BUF_FLUSH);
 	r = input_buf(info, &buf, &len);
 
 	if (r == -1) /* EOF */
@@ -84,7 +84,7 @@ ssize_t get_input(info_t *info)
 		}
 
 		*buf_p = p; /* Pass back the pointer to the current command position. */
-		return _strlen(p); /* Return the length of the current command. */
+		return strlen(p); /* Return the length of the current command. */
 	}
 
 	*buf_p = buf; /* Otherwise, not a chain, pass back the buffer from _getline(). */
@@ -141,17 +141,17 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (r == -1 || (r == 0 && len == 0))
 		return -1;
 
-	c = _strchr(buf + i, '\n');
+	c = strchr(buf + i, '\n');
 	k = c ? 1 + (unsigned int)(c - buf) : len;
-	new_p = _realloc(p, s, s ? s + k : k + 1);
-
+	new_p = realloc(p, s, s ? s + k : k + 1);
+	
 	if (!new_p) /* MALLOC FAILURE! */
 		return p ? free(p), -1 : -1;
 
 	if (s)
-		_strncat(new_p, buf + i, k - i);
+		strncat(new_p, buf + i, k - i);
 	else
-		_strncpy(new_p, buf + i, k - i + 1);
+		strncpy(new_p, buf + i, k - i + 1);
 
 	s += k - i;
 	i = k;
@@ -172,7 +172,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
  */
 void sigintHandler(__attribute__((unused)) int sig_num)
 {
-	_puts("\n");
-	_puts("$ ");
-	_putchar(BUF_FLUSH);
+	_eputs("\n");
+	_eputs("$ ");
+	_eputchar(BUF_FLUSH);
 }

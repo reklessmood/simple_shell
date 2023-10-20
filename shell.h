@@ -99,7 +99,7 @@ void set_info(info_t *, char **);
 void free_info(info_t *, int);
 char *get_history_file(info_t);
 int write_history(info_t);
-int read_history(info_t);
+int read_history(info_t *info);
 int build_history_list(info_t, char *, int);
 int renumber_history(info_t);
 list_t *add_node(list_t **, const char *, int);
