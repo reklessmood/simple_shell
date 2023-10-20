@@ -121,7 +121,6 @@ int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
 int is_delim(char, char *);
-int _isalpha(int);
 int _atoi(char *);
 void print_error(info_t *, char *);
 int print_d(int, int);

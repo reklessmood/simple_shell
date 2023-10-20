@@ -6,7 +6,7 @@
  *
  * Return: Allocated string containing the history file path.
  */
-char *get_history_file(info_t *info)
+char *get_history_file(info_t *info);
 {
 	char *buf, *dir;
 
@@ -29,7 +29,7 @@ char *get_history_file(info_t *info)
  *
  * Return: 1 on success, else -1.
  */
-int write_history(info_t *info)
+int write_history(info_t *info);
 {
 	ssize_t fd;
 	char *filename = get_history_file(info);
@@ -59,7 +59,7 @@ int write_history(info_t *info)
  *
  * Return: Histcount on success, 0 otherwise.
  */
-int read_history(info_t *info)
+int read_history(info_t *info);
 {
 	int i, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;
@@ -124,7 +124,7 @@ int read_history(info_t *info)
  *
  * Return: Always 0.
  */
-int build_history_list(info_t *info, char *buf, int linecount)
+int build_history_list(info_t *info, char *buf, int linecount);
 {
 	list_t *node = NULL;
 
@@ -145,7 +145,7 @@ int build_history_list(info_t *info, char *buf, int linecount)
  *
  * Return: The new histcount.
  */
-int renumber_history(info_t *info)
+int renumber_history(info_t *info);
 {
 	list_t *node = info->history;
 	int i = 0;

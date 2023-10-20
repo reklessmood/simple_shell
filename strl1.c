@@ -7,7 +7,8 @@
  *
  * Return: Pointer to the destination.
  */
-char *_strcpy(char *dest, char *src) {
+char *_strcpy(char *dest, char *src);
+{
 	int i = 0;
 
 	if (dest == src || src == 0)
@@ -27,7 +28,8 @@ char *_strcpy(char *dest, char *src) {
  *
  * Return: Pointer to the duplicated string, or NULL if memory allocation fails.
  */
-char *_strdup(const char *str) {
+char *_strdup(const char *str);
+{
 	int length = 0;
 	char *ret;
 
@@ -67,7 +69,8 @@ void _puts(char *str) {
  *
  * Return: On success 1. On error, -1 is returned, and errno is set appropriately.
  */
-int _putchar(char c) {
+int _putchar(char c);
+{
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
 

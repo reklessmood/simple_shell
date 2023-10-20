@@ -7,7 +7,7 @@
  *
  * Return: 1 if true, 0 otherwise.
  */
-int is_cmd(info_t *info, char *path)
+int is_cmd(info_t *info, char *path);
 {
 	struct stat st;
 
@@ -30,7 +30,7 @@ int is_cmd(info_t *info, char *path)
  *
  * Return: Pointer to a new buffer.
  */
-char *dup_chars(char *pathstr, int start, int stop)
+char *dup_chars(char *pathstr, int start, int stop);
 {
 	static char buf[1024];
 	int i, k = 0;
@@ -52,7 +52,7 @@ char *dup_chars(char *pathstr, int start, int stop)
  *
  * Return: Full path of cmd if found, or NULL.
  */
-char *find_path(info_t *info, char *pathstr, char *cmd)
+char *find_path(info_t *info, char *pathstr, char *cmd);
 {
 	int i = 0, curr_pos = 0;
 	char *path;
