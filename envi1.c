@@ -7,8 +7,10 @@
  *
  * Return: A string array copy of the environ.
  */
-char **get_environ(info_t *info) {
-	if (!info->environ || info->env_changed) {
+char **get_environ(info_t *info)
+{
+	if (!info->environ || info->env_changed)
+	{
 		info->environ = list_to_strings(info->env);
 		info->env_changed = 0;
 	}
@@ -23,7 +25,8 @@ char **get_environ(info_t *info) {
  *
  * Return: 1 on delete, 0 otherwise.
  */
-int _unsetenv(info_t *info, char *var) {
+int _unsetenv(info_t *info, char *var)
+{
 	list_t *node = info->env;
 	size_t i = 0;
 	char *p;
@@ -31,9 +34,11 @@ int _unsetenv(info_t *info, char *var) {
 	if (!node || !var)
 		return 0;
 
-	while (node) {
-		p = node_starts_with(node->str, var);
-		if (p && *p == '=') {
+	while (node)
+	{
+		p = node_starts_with(node, var, '='); 
+		if (p)
+		{
 			info->env_changed = delete_node_at_index(&(info->env), i);
 			i = 0;
 			node = info->env;
@@ -45,6 +50,7 @@ int _unsetenv(info_t *info, char *var) {
 	return info->env_changed;
 }
 
+
 /**
  * _setenv - Initializes a new environment variable or modifies an existing one.
  * @info: Structure containing potential arguments. Used to maintain
@@ -54,7 +60,8 @@ int _unsetenv(info_t *info, char *var) {
  *
  * Return: Always 0.
  */
-int _setenv(info_t *info, char *var, char *value) {
+int _setenv(info_t *info, char *var, char *value)
+{
 	char *buf = NULL;
 	list_t *node;
 	char *p;
@@ -69,9 +76,11 @@ int _setenv(info_t *info, char *var, char *value) {
 	strcat(buf, "=");
 	strcat(buf, value);
 	node = info->env;
-	while (node) {
-		p = node_starts_with(node->str, var);
-		if (p && *p == '=') {
+	while (node)
+	{
+		p = node_starts_with(node, var, '=');
+		if (p)
+		{
 			free(node->str);
 			node->str = buf;
 			info->env_changed = 1;
